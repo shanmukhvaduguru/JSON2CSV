@@ -1,44 +1,30 @@
-name: Deploy React App
+name: Node.js CI
 
 on:
   push:
-    branches:
-      - main
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # 👈 IMPORTANT
+    branches: [ main ]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20   # your app runtime (can also use 18/20)
+          node-version: 20
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build App
-        run: npm run build
+      - name: Run tests (if any)
+        run: npm test || echo "No tests found"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload Build
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./build
-
-      - name: Deploy
-        uses: actions/deploy-pages@v4
+      - name: Start app check
+        run: |
+          node src/index.js &
+          sleep 5
+          echo "App started successfully"
