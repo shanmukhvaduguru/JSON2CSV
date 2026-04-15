@@ -1,0 +1,15 @@
+node_modules/
+.env
+*.log
+uploads/
+.DS_Store
+Thumbs.db
+.claude/
+.claude*
+.mcp*
+.cursor*
+.idea/
+.vscode/
+*.iml
+*package-lock.json
+*.yarn.lock

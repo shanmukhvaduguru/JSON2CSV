@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Json2Excel — Preview</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header site-header--table">
+    <div class="header-inner header-inner--spread">
+      <div class="header-left">
+        <a href="/" class="btn btn-secondary">← New Conversion</a>
+        <% if (filename) { %>
+          <span class="filename-badge"><%= filename %></span>
+        <% } %>
+      </div>
+      <div class="export-bar">
+        <a href="/export/csv" class="btn btn-export">
+          Download CSV
+        </a>
+        <a href="/export/excel" class="btn btn-export btn-export--excel">
+          Download Excel (.xlsx)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container container--wide">
+    <div class="table-meta">
+      <h1 class="table-title">Preview</h1>
+      <span class="meta-badge"><%= count %> row<%= count !== 1 ? 's' : '' %></span>
+      <span class="meta-badge"><%= columns.length %> column<%= columns.length !== 1 ? 's' : '' %></span>
+    </div>
+
+    <div class="table-wrapper">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th class="row-num">#</th>
+            <% columns.forEach(function(col, i) { %>
+              <th data-col="<%= i %>" class="sortable" title="Click to sort">
+                <%= col %>
+                <span class="sort-icon">↕</span>
+              </th>
+            <% }); %>
+          </tr>
+        </thead>
+        <tbody>
+          <% rows.forEach(function(row, idx) { %>
+            <tr>
+              <td class="row-num"><%= idx + 1 %></td>
+              <% columns.forEach(function(col) { %>
+                <td><%= row[col] !== undefined && row[col] !== null ? row[col] : '' %></td>
+              <% }); %>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="export-footer">
+      <a href="/export/csv" class="btn btn-export">Download CSV</a>
+      <a href="/export/excel" class="btn btn-export btn-export--excel">Download Excel (.xlsx)</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Json2Excel &mdash; No data is sent to any server beyond your own session.</p>
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
