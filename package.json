@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Convert JSON, JS, CSV, and Excel files to downloadable Excel/CSV",
   "main": "src/index.js",
+  "homepage": "https://shanmukhvaduguru.github.com/JSON2CSV",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
