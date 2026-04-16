@@ -12,5 +12,3 @@ Thumbs.db
 .idea/
 .vscode/
 *.iml
-*package-lock.json
-*.yarn.lock
