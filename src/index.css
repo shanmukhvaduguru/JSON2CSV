@@ -494,3 +494,266 @@ tbody tr:last-child td { border-bottom: none; }
   .form-actions { flex-direction: column; align-items: stretch; }
   .table-meta { gap: 8px; }
 }
+
+/* ============================================================
+   Table Enhancements — Search, Cell Actions, Edit/Delete, Modals
+   ============================================================ */
+
+/* ----- JSON export button ----- */
+.btn-export--json {
+  background: var(--color-surface);
+  color: #7c3aed;
+  border-color: #7c3aed;
+}
+.btn-export--json:hover {
+  background: #7c3aed;
+  color: white;
+}
+
+/* ----- Success button (used in JSON modal after copy) ----- */
+.btn-success {
+  background: var(--color-success);
+  color: white;
+  border-color: var(--color-success);
+}
+
+/* ----- Meta badge filter variant ----- */
+.meta-badge--filter {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+/* ----- Search bar ----- */
+.search-bar-wrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+.search-bar {
+  width: 100%;
+  padding: 9px 36px 9px 36px;
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-family: var(--font);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.search-bar:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+}
+.search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+.search-clear:hover { background: var(--color-bg); color: var(--color-text); }
+
+/* ----- Data cell with hover actions ----- */
+.data-cell {
+  position: relative;
+  padding: 0 !important;
+}
+.cell-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 14px;
+  min-width: 0;
+}
+.cell-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+.cell-actions {
+  display: none;
+  align-items: center;
+  flex-shrink: 0;
+}
+.data-cell:hover .cell-actions {
+  display: flex;
+}
+.cell-icon {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 1px 5px;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+.cell-icon:hover { background: var(--color-primary-light); border-color: var(--color-primary); color: var(--color-primary); }
+
+/* Edit icon — sits outside cell-wrapper, appears on cell hover */
+.cell-edit-icon {
+  display: none;
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 1px 4px;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+.data-cell:hover .cell-edit-icon {
+  display: block;
+}
+.cell-edit-icon:hover { background: #fef9c3; border-color: #ca8a04; color: #ca8a04; }
+
+/* Copied toast */
+.copied-toast {
+  font-size: 0.72rem;
+  background: var(--color-success-light);
+  color: var(--color-success);
+  border: 1px solid #86efac;
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* ----- Delete column ----- */
+.delete-col {
+  width: 36px;
+  text-align: center;
+  padding: 0 4px !important;
+  border-right: 1px solid var(--color-border);
+}
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 3px 5px;
+  border-radius: var(--radius-sm);
+  opacity: 0.4;
+  transition: opacity 0.12s, background 0.12s;
+}
+.btn-delete:hover { opacity: 1; background: #fee2e2; }
+
+/* ----- Modal overlay ----- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 560px;
+  max-height: 80vh;
+  overflow: hidden;
+}
+.modal--wide {
+  max-width: 860px;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  gap: 12px;
+  flex-shrink: 0;
+}
+.modal-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--color-muted);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+.modal-close:hover { background: var(--color-bg); color: var(--color-text); }
+.modal-body {
+  flex: 1;
+  overflow: auto;
+  padding: 16px 20px;
+}
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+/* Edit textarea */
+.edit-textarea {
+  width: 100%;
+  min-height: 160px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  resize: vertical;
+  background: #fafafa;
+  color: var(--color-text);
+}
+.edit-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+  background: white;
+}
+
+/* JSON preview */
+.json-pre {
+  margin: 0;
+  padding: 16px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  border-radius: var(--radius);
+  overflow: auto;
+  white-space: pre;
+  max-height: 55vh;
+}
