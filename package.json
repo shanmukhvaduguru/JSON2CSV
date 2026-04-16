@@ -1,31 +1,22 @@
 {
   "name": "json2excel",
-  "version": "1.0.0",
-  "description": "Convert JSON, JS, CSV, and Excel files to downloadable Excel/CSV",
-  "main": "src/index.js",
-  "homepage": "https://shanmukhvaduguru.github.com/JSON2CSV",
+  "version": "2.0.0",
+  "description": "Convert JSON, JS, CSV, and Excel files — preview and export, runs entirely in the browser",
+  "type": "module",
+  "homepage": "https://shanmukhvaduguru.github.io/JSON2CSV/",
   "scripts": {
-    "start": "node src/index.js",
-    
-    "dev": "nodemon src/index.js",
-    "test": "playwright test",
-    "test:ui": "playwright test --ui",
-    "test:headed": "playwright test --headed"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "csv-parse": "^5.5.6",
-    "csv-stringify": "^6.5.1",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "express-session": "^1.18.0",
-    "multer": "^2.1.1",
+    "papaparse": "^5.4.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0",
-    "@playwright/test": "^1.44.0"
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.0"
   }
 }
