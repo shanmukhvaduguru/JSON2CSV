@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.ghpages-local/
 .env
 *.log
 uploads/

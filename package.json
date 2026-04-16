@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preview:ghpages": "node scripts/preview-ghpages.js"
   },
   "dependencies": {
     "papaparse": "^5.4.1",
